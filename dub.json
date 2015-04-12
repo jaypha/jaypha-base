@@ -1,0 +1,9 @@
+{
+  "name": "jaypha-base",
+  "description": "Generic code and definitions used in many Jaypha projects.",
+  "authors": [ "Jason den Dulk" ],
+  "license": "BSL-1.0",
+  "targetType": "sourceLibrary",
+  "importPaths": [ "src" ],
+  "srcPaths": [ "src" ],
+}
