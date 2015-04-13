@@ -29,11 +29,17 @@ License
 
 Distributed under the Boost License.
 
+Contact
+-------
+
+jason@jaypha.com.au
+
 Todo
 ----
 
-Documentation needs to be finished. Many functions could do with polishing, but are usable
-in the current state.
+Many functions could do with polishing, but are usable in the current state.
 
 Current Problems
 ----------------
+
+None known
