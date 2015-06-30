@@ -31,7 +31,7 @@ struct Rnd
   }
 }
 
-Rnd rnd() { return Rnd(); }
+@property Rnd rnd() { return Rnd(); }
 
 //-----------------------------------------------------------------------------
 // A randomly generated string of hex characters. Useful for filenames.

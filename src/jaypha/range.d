@@ -39,22 +39,43 @@ void drain(R)(ref R r) if (isInputRange!R)
 
 //----------------------------------------------------------------------------
 // Splits a range into chunks of given size. Doesn't work with narrow
-// strings.
+// strings (It might split a character in the middle).
 
 struct ByChunk(R) if (!isNarrowString!R)
 {
-  this(R range, size_t chunkSize) { rng = range; num = chunkSize; }
+  alias Unqual!(ElementType!R) E;
 
-  @property bool empty() { return rng.empty; }
+  this(R range, size_t chunkSize)
+  {
+    front.length = chunkSize;
+    rng = range;
+    num = chunkSize;
+    popFront();
+  }
 
-  @property R front() { return rng.take(num); }
+  E[] front;
 
-  void popFront() { rng = rng.drop(num); }
+  bool empty = false;
+
+  void popFront()
+  {
+    if (empty) return;
+    if (rng.empty)
+    {
+      front.length = 0;
+      empty = true;
+    }
+    else foreach (i; 0..num)
+    {
+      if (rng.empty) { front.length = i; break; }
+      front[i] = rng.front;
+      rng.popFront();
+    }
+  }
 
   private:
     R rng;
     size_t num;
-
 }
 
 ByChunk!R byChunk(R)(R range, size_t chunkSize)
@@ -67,8 +88,6 @@ ByChunk!R byChunk(R)(R range, size_t chunkSize)
 
 unittest
 {
-  import std.stdio;
-
   ubyte[] txt = cast(ubyte[]) "acabacbxyz".dup;
   auto buff = appender!(ubyte[]);
 

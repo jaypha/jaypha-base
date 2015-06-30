@@ -33,7 +33,7 @@ alias binToHex bin2hex;
 
 
 //----------------------------------------------------------------------------
-// Extract the bits from a number and puts them into an aray.
+// Extract the bits from a number and puts them into an array.
 // eg. 01101b => [ 1000b, 100b, 1b ].
 
 @safe pure nothrow T[] bitsToList(T)(T bits) if(__traits(isIntegral,T) && __traits(isUnsigned,T))
@@ -67,51 +67,6 @@ alias binToHex bin2hex;
 }
 
 //----------------------------------------------------------------------------
-
-/+
-
-struct AsUTF16(R) if (isInputRange!R && Unqual(ElementType!R)==ubyte)
-{
-  R range;
-
-  wchar current;
-  bool is_empty = false;
-
-  this(R r, Endian endianness = Endian.bigEndian) { range = r; popFront(); }
-
-  @property bool empty() { return is_empty; }
-
-  @property wchar front() { return current; }
-
-  void popFront()
-  {
-    if (range.empty)
-      is_empty = true;
-    else
-    {
-      ushort a = range.front();
-      range.popFront();
-      enforce(!range.empty);
-      ushort b = range.front();
-      range.popFront();
-      current = cast (wchar)(a << 8 | b);
-    }
-  }
-}
-
-struct AsUTF8(R) //if (isInputRange!R && Unqual(ElementType!R)==ubyte)
-{
-  R range;
-
-  this(R r) { range = r; }
-
-  @property bool empty() { return range.empty; }
-
-  @property char front() { return cast(char)range.front; }
-  void popFront() { range.popFront(); }
-}
-
-+/
 
 unittest
 {
