@@ -69,6 +69,7 @@ kept separate to avoid repetition. They are also useful on their own.</p>
  <tr><td>jaypha.types</td><td>Commonly used definitions and aliases</td></tr>
  <tr><td>jaypha.algorithm</td><td>Some algorithm routines and templates</td></tr>
  <tr><td>jaypha.conv</td><td>Some conversion routines</td></tr>
+ <tr><td>jaypha.json</td><td>Functions to complement std.json</td></tr>
  <tr><td>jaypha.range</td><td>Some rountines for use with ranges</td></tr>
  <tr><td>jaypha.rnd</td><td>Wrapper for std.random.rndGen and some useful routines</td></tr>
  <tr><td>jaypha.string</td><td>String utilities</td></tr>
@@ -89,6 +90,7 @@ kept separate to avoid repetition. They are also useful on their own.</p>
   <tr><td><a href='#diff'>diff</a></td>       <td>jaypha.algorithm</td><td>Returns everything in one array that is not in another</td></tr>
   <tr><td><a href='#drain'>drain</a></td>      <td>jaypha.range</td><td>Consume the rest of the range.</td></tr>
   <tr><td><a href='#findSplit'>findSplit</a></td>  <td>jaypha.algorithm</td><td>Alternative to std.alogrithm.findSplit usable with non-rewindable ranges</td></tr>
+  <tr><td><a href='#fromJSON'>fromJSON</a></td>  <td>jaypha.json</td><td>Attempts to read from a JSON value via a template.</td></tr>
   <tr><td><a href='#grab'>grab</a></td>       <td>jaypha.algorithm</td><td>Grabs as much of the given string, until a character is found that is in a supplied pattern.</td></tr>
   <tr><td><a href='#isDigits'>isDigits</a></td>   <td>jaypha.string</td><td>Are all characters digits?</td></tr>
   <tr><td><a href='#listToBits'>listToBits</a></td> <td>jaypha.conv</td><td>Reduces an array to a single value by or-ing them together.</td></tr>
@@ -230,6 +232,23 @@ eg. [ 1000b, 100b, 1b ] => 01101b</p>
 
 
 
+<h3>jaypha.json</h3>
+
+<a name="fromJSON"></a><dt class="d_decl">T <span class="funcName">fromJSON</span>(T)(JSONValue jVal) if(isScalarType!T || isSomeString!T)<br/>
+T[] <span class="funcName">fromJSON</span>(T:T[])(JSONValue jVal) if(!isSomeString!T)<br/>
+T[string] <span class="funcName">fromJSON</span>(T:T[string])(JSONValue jVal)</dt>
+<dd><p>Extracts a value from a JSONValue object, using templates.</p>
+<p> For the scalar and string types, the function will attempt to read the
+ value and then convert it to the desired type.</p>
+<p>For arrays and objects (associative arrays indexed by strings), each value in the array
+will be extracted using the fromJSON function.</p>
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>JSONValue <i>jVal</i></td><td>JSONValue object to extract value from.</td></tr>
+</table>
+<p><b>Returns:</b><br>The extracted value, in the type requested.</p>
+</dd>
+
 <h3>jaypha.range</h3>
 
 <dt class="d_decl">void <a name="munch"></a><span class="funcName">munch</span>(R,E)(ref R range, E pattern)
@@ -302,6 +321,16 @@ was provided by monarch_dodra. You use it the same way you use rndGen.</p>
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
+</table>
+</dd>
+
+<dt class="d_decl">string <a name="rndString"></a><span class="funcName">rndString</span>(size_t size, immutable char[] allowableChars)</dt>
+<dd><p>Creates a randomly generated string of ASCII characters from the given set of allowable characters.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
+<tr><td class='code'>immutable char[] <i>allowableChars</i></td><td>A string containing the allowable characters.</td></tr>
 </table>
 </dd>
 

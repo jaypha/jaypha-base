@@ -79,17 +79,11 @@ unittest
 {
   string[string] x = [ "one":"1", "bee":"3", "john":"66" ];
 
-  char[] z;
   auto y = x.meld!((a,b) => (a~b));
-  while (!y.empty)
-  {
-    z ~= y.front;
-    y.popFront();
-    z ~= ",";
-  }
-  z = z[0..$-1];
-
-  assert(cast(const(char)[])z == "one1,bee3,john66");
+  string[] yy = new string[](3);
+  y.copy(yy);
+  sort(yy);  // Do sort to make the order predictable
+  assert(yy == ["bee3","john66","one1"]);
 }
 
 //----------------------------------------------------------------------------
