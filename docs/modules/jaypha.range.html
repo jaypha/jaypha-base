@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Jaypha Base Documentation</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module jaypha.range</h1>
+
+
+<dt class="d_decl">void <a name="munch"></a><span class="funcName">munch</span>(R,E)(ref R range, E pattern)
+  if (isInputRange!R &amp;&amp; isInputRange!E &amp;&amp;
+      isScalarType!(ElementType!E) &amp;&amp; isScalarType!(ElementType!R))</dt>
+<dd><p>Consumes the front of <i>range</i> as long the elements are inside <i>pattern</i>.
+That is, as long as one of the elements of <i>pattern</i> matches <i>range.front</i>, than range will be popped.
+<i>range</i> can be a basic input range.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>ref R <i>range</i></td><td>The input range to be processed.</td></tr>
+<tr><td class='code'>E <i>pattern</i></td><td>An input range of the same element type of the range</td></tr>
+</table>
+</dd>
+
+<dt class="d_decl">void <a name="drain"></a><span class="funcName">drain</span>(R)(ref R r) if (isInputRange!R)</dt>
+<dd><p>Pops <i>range</i> until <i>range.empty</i> is true.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>ref R <i>range</i></td><td>The input range to be drained.</td></tr>
+</table>
+</dd>
+
+<dt class="d_decl">struct <a name="ByChunk"><span class="funcName">ByChunk</span>(R) if (!isNarrowString!R)</a></dt>
+<dd><p>Allows a range to be traversed in chunks. Shouldn't be used with narrow strings as
+a character may be chopped in half.</p>
+
+<b>Methods:</b>
+<table class='parms'>
+<tr><td class='code'>this(R range, size_t chunkSize)</td><td></td></tr>
+<tr><td class='code'>@property T front()</td><td>Gives a subrange of chuckSize length (or less if at end of range)</td></tr>
+<tr><td class='code'>@property bool empty()</td><td></td></tr>
+<tr><td class='code'>void popFront()</td><td>Pops chunkSize elements off the range.</td></tr>
+</table>
+</dd>
+
+<dt class="d_decl">ByChunk!R <a name="byChunk"></a><span class="funcName">byChunk</span>(R)(R range, size_t chunckSize)</dt>
+<dd><p>A convenience function for making ByChunk instances.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>R <i>range</i></td><td>The input range.</td></tr>
+<tr><td class='code'>size_t <i>chunkSize</i></td><td>The size of the chunks</td></tr>
+</table>
+<p><b>Returns:</b><br>A <i>ByChunk</i> instance initialised with the range and chunk size.</p>
+</dd>
+
+<dt class="d_decl">struct <a name="ByLines"><span class="funcName">ByLines</span>(R) if (isInputRange!R && isSomeChar!(ElementType!R))</a></dt>
+<dd><p>Allows a range to be traversed by lines. Lines are terminated by "\\r\\n", "\\n", and "\\r", as well as the end of range.</p>
+
+<b>Methods:</b>
+<table class='parms'>
+<tr><td class='code'>alias ElementType!R Char</td><td></td></tr>
+<tr><td class='code'>this(R range)</td><td></td></tr>
+<tr><td class='code'>@property Char[] front()</td><td>Gives the current first line of the range</td></tr>
+<tr><td class='code'>@property bool empty()</td><td></td></tr>
+<tr><td class='code'>void popFront()</td><td>Pops a line off the range.</td></tr>
+</table>
+</dd>
+
+<dt class="d_decl">ByLines!R <a name="byChunk"></a><span class="funcName">byLines</span>(R)(R range)</dt>
+<dd><p>A convenience function for making ByLines instances.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>R <i>range</i></td><td>The input range.</td></tr>
+</table>
+<p><b>Returns:</b><br>A <i>ByLines</i> instance initialised with the range.</p>
+</dd>
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>

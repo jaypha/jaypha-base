@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Jaypha Base Documentation</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module jaypha.rnd</h1>
+
+<p>Wrapper for std.random.rndGen and some useful routines</p>
+
+
+<dt class="d_decl">struct Rnd<br/>
+Rnd <a name="rnd"></a><span class="funcName">rnd</span>()</dt>
+<dd><p>A wrapper for std.random.rndGen to prevent repitition caused by copying. This structure
+was provided by monarch_dodra. You use it the same way you use rndGen.</p>
+</dd>
+
+<dt class="d_decl">string <a name="rndHex"></a><span class="funcName">rndHex</span>(size_t size)</dt>
+<dd><p>Creates a randomly generated string of hex characters.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
+</table>
+</dd>
+
+<dt class="d_decl">string <a name="rndString"></a><span class="funcName">rndString</span>(size_t size)</dt>
+<dd><p>Creates a randomly generated string of ASCII printable characters.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
+</table>
+</dd>
+
+<dt class="d_decl">string <a name="rndString"></a><span class="funcName">rndString</span>(size_t size, immutable char[] allowableChars)</dt>
+<dd><p>Creates a randomly generated string of ASCII characters from the given set of allowable characters.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
+<tr><td class='code'>immutable char[] <i>allowableChars</i></td><td>A string containing the allowable characters.</td></tr>
+</table>
+</dd>
+
+<dt class="d_decl">string <a name="rndId"></a><span class="funcName">rndId</span>(size_t size)</dt>
+<dd><p>Creates a randomly generated string of lower case ASCII letters.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
+</table>
+</dd>
+
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>

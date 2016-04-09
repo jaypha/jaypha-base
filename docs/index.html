@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Jaypha Base Documentation</title>
+ <link rel='stylesheet' type='text/css' href='docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='images/jaypha-94x24.gif'/>
+ <a href='docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Jaypha Base Index</h1>
+
+<h2>Function Index</h2>
+
+<table>
+ <thead>
+  <tr><th>Name</th><th>Module</th><th>Description</th></tr>
+ </thead>
+ <tbody>
+  <tr><td><a href='modules/jaypha.string.html#altIndexOf'>altIndexOf</a></td> <td>jaypha.string</td><td>A quick and dirty alternative to indexOf. Only works with ASCII.</td></tr>
+  <tr><td><a href='modules/jaypha.conv.html#binToHex'>binToHex</a></td>    <td>jaypha.conv</td><td>Converts an unsigned interger into a hex string.</td></tr>
+  <tr><td><a href='modules/jaypha.conv.html#bitsToList'>bitsToList</a></td> <td>jaypha.conv</td><td>Extract the bits from a number and puts them into an aray.</td></tr>
+  <tr><td><a href='modules/jaypha.range.html#byChunk'>byChunk</a></td>    <td>jaypha.range</td><td>Convenience function for ByChunk structs</td></tr>
+  <tr><td><a href='modules/jaypha.range.html#byLines'>byLines</a></td>    <td>jaypha.range</td><td>Convenience function for ByLines structs</td></tr>
+  <tr><td><a href='modules/jaypha.algorithm.html#diff'>diff</a></td>       <td>jaypha.algorithm</td><td>Returns everything in one array that is not in another</td></tr>
+  <tr><td><a href='modules/jaypha.range.html#drain'>drain</a></td>      <td>jaypha.range</td><td>Consume the rest of the range.</td></tr>
+  <tr><td><a href='modules/jaypha.algorithm.html#findSplit'>findSplit</a></td>  <td>jaypha.algorithm</td><td>Alternative to std.alogrithm.findSplit usable with non-rewindable ranges</td></tr>
+  <tr><td><a href='modules/jaypha.json.html#fromJSON'>fromJSON</a></td>  <td>jaypha.json</td><td>Attempts to read from a JSON value via a template.</td></tr>
+  <tr><td><a href='modules/jaypha.algorithm.html#grab'>grab</a></td>       <td>jaypha.algorithm</td><td>Grabs as much of the given string, until a character is found that is in a supplied pattern.</td></tr>
+  <tr><td><a href='modules/jaypha.string.html#isDigits'>isDigits</a></td>   <td>jaypha.string</td><td>Are all characters digits?</td></tr>
+  <tr><td><a href='modules/jaypha.conv.html#listToBits'>listToBits</a></td> <td>jaypha.conv</td><td>Reduces an array to a single value by or-ing them together.</td></tr>
+  <tr><td><a href='modules/jaypha.algorithm.html#meld'>meld</a></td>       <td>jaypha.algorithm</td><td>Map-like algorithm that merges the index and values of an associative array.</td></tr>
+  <tr><td><a href='modules/jaypha.range.html#munch'>munch</a></td>      <td>jaypha.range</td><td>Consumes the front of the range as long the elements are inside pattern.</td></tr>
+  <tr><td><a href='modules/jaypha.rnd.html#rnd'>rnd</a></td>        <td>jaypha.rnd</td><td>A wrapper for rndGen to prevent copying, provided by monarch_dodra.</td></tr>
+  <tr><td><a href='modules/jaypha.rnd.html#rndHex'>rndHex</a></td>     <td>jaypha.rnd</td><td>A randomly generated string of hex characters. Useful for filenames.</td></tr>
+  <tr><td><a href='modules/jaypha.rnd.html#rndId'>rndId</a></td>      <td>jaypha.rnd</td><td>A random string of lower case ASCII letters</td></tr>
+  <tr><td><a href='modules/jaypha.rnd.html#rndString'>rndString</a></td>  <td>jaypha.rnd</td><td> A random string of ASCII printable characters. Useful for passwords.</td></tr>
+  <tr><td><a href='modules/jaypha.string.html#splitUp'>splitUp</a></td>    <td>jaypha.string</td><td>Splits a string into substrings based on a group of possible delimiters</td></tr>
+  <tr><td><a href='modules/jaypha.string.html#toCamelCase'>toCamelCase</a></td><td>jaypha.string</td><td>Converts a string to camel case.</td></tr>
+ </tbody>
+</table>
+
+<h2>Class and Struct Index</h3>
+
+<table>
+ <thead>
+  <tr><th>Name</th><th>Module</th><th>Description</th></tr>
+ </thead>
+ <tbody>
+  <tr><td><a href='modules/jaypha.range.html#ByChunk'>ByChunk</a></td>    <td>jaypha.range</td><td>Splits a range into chunks of given size. Doesn't work with narrow strings.</td></tr>
+  <tr><td><a href='modules/jaypha.range.html#ByLines'>ByLines</a></td>    <td>jaypha.range</td><td>Splits a range into lines.</td></tr>
+  <tr><td><a href='modules/jaypha.container.set#indexableset'>IndexableSet</a></td>      <td>jaypha.container.set</td><td>set whose elements can be accessed by index.</td></tr>
+  <tr><td><a href='modules/jaypha.container.hash.html#Hash'>Hash</a></td>    <td>jaypha.container.hash</td><td>Hash container.</td></tr>
+  <tr><td><a href='modules/jaypha.container.queue#queue'>Queue</a></td>      <td>jaypha.container.queue</td><td>Simple queue implementation</td></tr>
+  <tr><td><a href='modules/jaypha.algorithm.html#rtMap'>rtMap</a></td>      <td>jaypha.algorithm</td><td>Similar to std.algorithm.map except that the mapping function is not a template parameter</td></tr>
+  <tr><td><a href='modules/jaypha.container.set#set'>Set</a></td>      <td>jaypha.container.set</td><td>Simple set implementation</td></tr>
+  <tr><td><a href='modules/jaypha.container.stack#stack'>Stack</a></td>      <td>jaypha.container.stack</td><td>Simple stack implementation</td></tr>
+ </tbody>
+</table>
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>

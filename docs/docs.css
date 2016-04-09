@@ -1,0 +1,79 @@
+*
+{
+  padding: 0;
+  margin: 0;
+}
+
+body
+{
+  font-size: 12px;
+  font-family:arial,sans-serif;
+}
+
+p, table, dd { margin-bottom: 0.7em; }
+
+h1,h2,h3 { margin-bottom: 0.7em; }
+h1 { font-size: 22px; color: red; }
+h2 { font-size: 18px; color: red; }
+h3 { font-size: 15px; color: red; }
+ 
+.header
+{
+  padding: 10px 0;
+  border-bottom: 1px solid grey;
+  margin-bottom: 0.7em;
+  text-align:left;
+}
+.header img { vertical-align: bottom; }
+
+table { border-collapse: collapse; }
+
+td, th { padding: 3px; border: 1px solid black; }
+
+a { text-decoration: none; }
+
+.decl
+{
+  border-radius: 5px;
+  border: solid 1px red;
+  margin-bottom: 10px;
+}
+
+.decl .defn
+{
+  background-color: #EDEACB;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom: 1px solid red;
+  padding: 2px 0 2px 2px;
+  text-align: left;
+  margin-bottom: 0.7em;
+  font-family: monospace;
+}
+
+.decl .desc
+{
+  padding: 5px 5px 5px 15px;
+}
+
+.funcName { font-weight: bold; }
+
+.code { font-family: monospace; color: #4AAFBF; }
+
+.footer
+{
+  text-align: center;
+  border-top: 1px solid grey;
+  padding-top: 5px;
+}
+
+.body
+{
+  width:600px;
+  margin:auto;
+}
+
+.aggregate-content
+{
+  margin-left:30px;
+}

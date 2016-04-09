@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Jaypha Base Documentation</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module jaypha.types</h1>
+
+<p>Defines some type aliases and traits for convenience</p>
+
+<div class='decl'>
+<div class="defn">alias string[string] <span class="funcName">strstr</span></div>
+<div class="desc">
+<p>Using this makes the code easier to read and dramatically reduces the incidence
+   of typos.</p>
+</div></div>
+
+<div class='decl'>
+<div class="defn">alias immutable(ubyte)[] <span class="funcName">ByteArray</span></div>
+<div class="desc">
+<p>Byte arrays and ranges utilise 'ubyte'. Used for octect streams and binary
+   data. Also a convenient way to avoid UTF conversion issues.</p>
+</div></div>
+
+<div class='decl'>
+<div class="defn">enum <span class="funcName">isByteRange(R)</span></div>
+<div class="desc">
+<p>Tests if <span class='code'>R</span> is a compatible input range of <span class='code'>ubyte</span>.</p>
+</div></div>
+
+<div class='decl'>
+<div class="defn">enum <span class="funcName">utfEnc(C)</span></div>
+<div class="desc">
+<p>Gives a string stating the UTF encoding relevent to the type. The mapping is</p>
+<table>
+<tr><td><b>C</b></td><td><b>utfEnc</b></td></tr>
+<tr><td><span class='code'>char</span></td><td>&quot;UTF-8&quot;</td></tr>
+<tr><td><span class='code'>wchar</span></td><td>&quot;UTF-16&quot;</td></tr>
+<tr><td><span class='code'>dchar</span></td><td>&quot;UTF-32&quot;</td></tr>
+<tr><td><span class='code'>string</span></td><td>&quot;UTF-8&quot;</td></tr>
+<tr><td><span class='code'>wstring</span></td><td>&quot;UTF-16&quot;</td></tr>
+<tr><td><span class='code'>dstring</span></td><td>&quot;UTF-32&quot;</td></tr>
+</table>
+</div></div>
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>

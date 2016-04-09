@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Jaypha Base Documentation</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module jaypha.json</h1>
+
+<div class='decl'>
+<a name="fromJSON"></a>
+<div class="defn">
+T <span class="funcName">fromJSON</span>(T)(JSONValue jVal) if(isScalarType!T || isSomeString!T)<br/>
+T[] <span class="funcName">fromJSON</span>(T:T[])(JSONValue jVal)  if(!isSomeString!T)<br/>
+T[string] <span class="funcName">fromJSON</span>(T:T[string])(JSONValue jVal)
+</div>
+<div class="desc">
+<p>Extracts a value from a <span class='code'>JSONValue</span> object, using templates.</p>
+<p> For the scalar and string types, the function will attempt to read the
+ value and then convert it to the desired type.</p>
+<p>For arrays and objects (associative arrays indexed by strings), each value in the array
+will be extracted using the <span class='code'>fromJSON</span> function.</p>
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>JSONValue <i>jVal</i></td><td>JSONValue object to extract value from.</td></tr>
+</table>
+<p><b>Returns:</b><br>The extracted value, in the type requested.</p>
+</div></div>
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>

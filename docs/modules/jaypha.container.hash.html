@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Jaypha Base Documentation</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module Reference - jaypha.container.hash</h1>
+
+<p>This module defines a multi-value Hash container.</p>
+
+<div class='decl'>
+<div class="defn">struct <a name="Hash"></a><span class="funcName">Hash(T)</span></div>
+<div class="desc">
+<p>A string hash table for elements of type T. It works similar to an associative
+array, but can store more than one value for a key.</p>
+
+<p>Internally the values are stored as a 2D associative array which can be
+accessed with the <span class='code'>all</span> property. 1D array
+functionality is mimiced for the common case of one value for an index. In the
+case where 1D style access is made to a key with more than one value, the
+first value is used.</p>
+
+<p>Example. For a Hash <span class='code'>x</span>, corresponding to <i>a=2&amp;b=3&amp;a=5</i>.</p>
+<p>
+ <span class='code'>x["a"]</span> will return <span class='code'>2</span> (the first (usually the only) value for <span class='code'>"a"</span>).<br/>
+ <span class='code'>x("a")</span> will return <span class='code'>[2,5]</span> (all the values for <span class='code'>"a"</span> in an array).<br/>
+ <span class='code'>x["a"] = 7</span> Assigns <span class='code'>7</span> to <span class='code'>"a"</span>.<br/>
+ <span class='code'>x("a")</span> now returns <span class='code'>[7]</span>.<br/>
+ <span class='code'>x["a"] = [12,4]</span> Assigns <span class='code'>[12,4]</span> to <span class='code'>"a"</span>.<br/>
+ <span class='code'>x("a")</span> now returns <span class='code'>[12,4]</span> and <span class='code'>x["a"]</span> returns <span class='code'>12</span>.<br/>
+ <span class='code'>x.add("a",6)</span> appends 6 to "a".<br/>
+ <span class='code'>x("a")</span> now returns <span class='code'>[12,4,6]</span>.<br/>
+ <span class='code'>x["b"]</span> returns <span class='code'>3</span>, while <span class='code'>x("b")</span> returns <span class='code'>[3]</span>.<br/>
+ <span class='code'>x.length</span> returns <span class='code'>2</span>, <span class='code'>x("a").length</span> returns <span class='code'>3</span>, and <span class='code'>x("b").length</span> returns <span class='code'>1</span>.<br/>
+</p>
+
+<p><b>Properties</b></p>
+<table class='parms'>
+<tr><td class='code'><a href='#all'>all</a></td>
+    <td>Returns contents as a 2D associative array</td></tr>
+<tr><td class='code'><a href='#length'>length</a></td>
+    <td>Number of keys used</td></tr>
+<tr><td class='code'><a href='#keys'>keys</a></td>
+    <td>The keys as an array</td></tr>
+<tr><td class='code'><a href='#values'>values</a></td>
+    <td>The values as a 2D array with no keys</td></tr>
+</table>
+
+<p><b>Methods</b></p>
+<table class='parms'>
+<tr><td class='code'><a href='#opCall'>this(this)</a></td>
+    <td>Deep copy constructor.</td></tr>
+<tr><td class='code'><a href='#opCall'>T[] opCall(string key)</a></td>
+    <td>Returns all contents for key.</td></tr>
+<tr><td class='code'><a href='#opCall'>T opIndex(string key)</a></td>
+    <td>Returns first content for key.</td></tr>
+<tr><td class='code'><a href='#opCall'>void opIndexAssign(T value, string key)</a></td>
+    <td>Assigns a value to the key, replacing existing contents.</td></tr>
+<tr><td class='code'><a href='#'>void opIndexAssign(T[] value, string key)</a></td>
+    <td>Assigns an array to the key, replacing existing contents.</td></tr>
+<tr><td class='code'><a href='#'>T[]* opIn_r(string key)</a></td>
+    <td>Returns pointer to contents for key, or <span class='code'>null</span> if key is not valid.</td></tr>
+<tr><td class='code'><a href='#'>Hash rehash()</a></td>
+    <td>Re hashes the container.</td></tr>
+<tr><td class='code'><a href='#'>void add(string key, T value)</a></td>
+    <td>Appends a value to key.</td></tr>
+<tr><td class='code'><a href='#'>void remove(string key)</a></td>
+    <td>Removes key and its contents.</td></tr>
+<tr><td class='code'><a href='#'>int opApply(int delegate(ref T[]) dg)</a></td>
+    <td>Allows foreach over values. Elements are arrays, so all stored values can be accessed.</td></tr>
+<tr><td class='code'><a href='#'>int opApply(int delegate(ref string, ref T[]) dg)</a></td>
+    <td>Same as above but supplies keys as well.</td></tr>
+<tr><td class='code'><a href='#'>void clear()</a></td>
+    <td>Clears the structure, setting it to empty.</td></tr>
+</table>
+
+</div>
+</div>
+
+<div class='decl'>
+<div class="defn">alias <a name="StrHash"></a>Hash!string <span class="funcName">StrHash</span></div>
+<div class="desc">
+<p>Convenience type for string hash tables.</p>
+</div>
+</div>
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>

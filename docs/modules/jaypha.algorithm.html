@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Jaypha Base Documentation</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module jaypha.algorithm</h1>
+
+<p>Some algorithm routines and templates</p>
+
+<div class='decl'>
+<a name=""></a><div class="defn">
+template meld(alias func)<br/>
+auto <span class="funcName">meld</span>(A)(A array)
+</div>
+<div class="desc">
+<p>Merges the indexes and values of an associative array using a supplied function.</p>
+<p><b>Parameters:</b><br/>
+<table class='parms'>
+<tr><td class='code'><i>func</i></td><td>A function that takes a key,value pair and merges them</td></tr>
+<tr><td class='code'><i>array</i></td><td>An associative array to be melded.</td></tr>
+</table>
+<p><b>Returns:</b><br/>An array containing the results of the meld.</p>
+<p><b>Example</b><br/><pre>
+  string[string] x = [ "one":"1", "bee":"3", "john":"66" ];
+
+  char[] z;
+  auto y = x.meld!((a,b) => (a~b));
+  assert (y == [ "one1", "bee3", "john66" ]);
+</pre>
+</div></div>
+
+<div class='decl'>
+<a name="diff"></a><div class="defn">T[] <span class="funcName">diff</span>(T)(T[] primary, T[] secondary)</div>
+<div class="desc">
+<p> Returns everything in primary that is not in secondary.</p>
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>T[] <i>primary</i></td><td>The array to be adjusted</td></tr>
+<tr><td class='code'>T[] <i>secondary</i></td><td>The filter</td></tr>
+</table>
+<p><b>Returns:</b><br>An array containing all elements in primary that are not in secondary.</p>
+</div></div>
+
+<div class='decl'>
+<a name="findSplit"></a><div class="defn">auto <span class="funcName">findSplit</span>(R1,R2)(ref R1 haystack, R2 needle)</div>
+<div class="desc">
+<p>Alternative to std.alogrithm.findSplit usable with non-rewindable ranges. Haystack becomes
+adjusted to the remaining range.
+</p>
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>R1 <i>haystack</i></td><td>The input range to be split.</td></tr>
+<tr><td class='code'>R2 <i>needle</i></td><td>The input range to be searcched for that will split the range.</td></tr>
+</table>
+<p><b>Returns:</b><br>A tuple containing the part of the input prior to the needle, and the needle itself.
+If the needle was not found, the tuple will contain the whole input range and an empty range.
+The original range will be adjusted to be the remaining input after the needle.</p>
+</div></div>
+
+<div class='decl'>
+<a name="rtMap"></a><div class="defn">struct <span class="funcName">rtMap</span>(R,T) if (isInputRange!R)</div>
+<div class="desc">
+<p>Similar to <span class='code'>std.algorithm.map</span> except that the mapping function is not a template parameter.
+Instead a delegate is provided at run time when creating the object.
+</p>
+<p>An <span class='code'>rtMap</span> instance defines an input range of type <span class='code'>T</span>.</p>
+
+<b>Template Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>R</td><td>The type of the input range to be mapped.</td></tr>
+<tr><td class='code'>T</td><td>The element type of rtMap.</td></tr>
+</table>
+
+<b>Methods:</b>
+<table class='parms'>
+<tr><td class='code'>this(R range, T delegate(ElementType!R) mapper)</td><td>Construct the object with a range and mapper function.</td></tr>
+<tr><td class='code'>@property T front()</td><td></td></tr>
+<tr><td class='code'>@property bool empty()</td><td></td></tr>
+<tr><td class='code'>void popFront()</td><td></td></tr>
+</table>
+
+<b>Example:</b><br>
+<pre>
+  uint m1(uint i) { return i+3; }
+  uint m2(uint i) { return i+6; }
+
+  uint[] src = [ 0, 4, 7 ];
+
+  auto rmap = rtMap!(uint[], uint)(src, &amp;m1);
+
+  auto dest = appender!(uint[]);
+  rmap.copy(dest);
+
+  assert(dest.data == [ 3, 7, 10 ]);
+
+  rmap = rtMap!(uint[], uint)(src, &amp;m2);
+
+  dest = appender!(uint[]);
+  rmap.copy(dest);
+
+  assert(dest.data == [ 6, 10, 13 ]);
+</pre></div></div>
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>
