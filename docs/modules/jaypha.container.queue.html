@@ -7,7 +7,7 @@
   Written by Jason den Dulk.
 -->
 <head>
- <title>Jaypha Base Documentation</title>
+ <title>Docs - jaypha.container.queue</title>
  <link rel='stylesheet' type='text/css' href='../docs.css'>
 </head>
 <body>
@@ -18,6 +18,40 @@
  <div style='clear:both' ></div>
 </div>
 
+<h1>Module jaypha.container.queue</h1>
+
+<p>This module defines a queue.</p>
+<p>A queue is a buffer where the first element added is the first element to be retrieved, or FIFO (First In First Out).</p>
+
+
+<div class='decl'>
+<div class="defn">struct <a name="Hash"></a><span class="funcName">Queue(E)</span></div>
+<div class="desc">
+<p>A simple queue implementation</p>
+<p>This queue acts as an ouput range for adding elemens to the queue, and as an input range for retreiving them.</p>
+
+<p><b>Properties</b></p>
+<table class='parms'>
+<tr><td class='code'>bool empty</td>
+    <td>True if the queue has zero elements.</td></tr>
+<tr><td class='code'>ref E front</td>
+    <td>The first element in the queue (earliest added)</td></tr>
+</table>
+
+<p><b>Methods</b></p>
+<table class='parms'>
+<tr><td class='code'>void put(E e)</td>
+    <td>Adds element to the queue</td></tr>
+<tr><td class='code'>Queue!E opOpAssign(string op)(E e) if (op=="~")<br/>
+Queue!E&nbsp;opOpAssign(string&nbsp;op)(E[]&nbsp;e)&nbsp;if (op=="~")<br/>
+Queue!E&nbsp;opOpAssign(string&nbsp;op)(Queue!E&nbsp;q)&nbsp;if&nbsp;(op=="~")
+</td>
+    <td>'~=' operator to append an element, an array of elements, or another queue. Elements are added in order.</td></tr>
+<tr><td class='code'>void popFront()</td>
+    <td>Removes the first element from the queue.</td></tr>
+</table>
+
+</div></div>
 
 <p class='footer'>
 Copyright 2015 Jaypha

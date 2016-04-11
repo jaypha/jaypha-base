@@ -7,7 +7,7 @@
   Written by Jason den Dulk.
 -->
 <head>
- <title>Jaypha Base Documentation</title>
+ <title>Docs - jaypha.rnd</title>
  <link rel='stylesheet' type='text/css' href='../docs.css'>
 </head>
 <body>
@@ -22,49 +22,48 @@
 
 <p>Wrapper for std.random.rndGen and some useful routines</p>
 
+<a name='rnd'></a>
+<div class='decl'>
+<div class='defn'>struct Rnd<br/>
+Rnd <span class="funcName">rnd</span>()</div>
+<div class='desc'><p>A wrapper for std.random.rndGen to prevent repitition caused by copying. This structure
+was provided by monarch_dodra. You use it the same way you use <span class='code'>rndGen</span>.</p>
+</div></div>
 
-<dt class="d_decl">struct Rnd<br/>
-Rnd <a name="rnd"></a><span class="funcName">rnd</span>()</dt>
-<dd><p>A wrapper for std.random.rndGen to prevent repitition caused by copying. This structure
-was provided by monarch_dodra. You use it the same way you use rndGen.</p>
-</dd>
-
-<dt class="d_decl">string <a name="rndHex"></a><span class="funcName">rndHex</span>(size_t size)</dt>
-<dd><p>Creates a randomly generated string of hex characters.</p>
-
-<b>Parameters:</b>
-<table class='parms'>
-<tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
-</table>
-</dd>
-
-<dt class="d_decl">string <a name="rndString"></a><span class="funcName">rndString</span>(size_t size)</dt>
-<dd><p>Creates a randomly generated string of ASCII printable characters.</p>
+<a name='rndHex'></a>
+<div class='decl'>
+<div class='defn'>string <span class="funcName">rndHex</span>(size_t size)</div>
+<div class='desc'><p>Creates a randomly generated string of hex characters.</p>
 
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
 </table>
-</dd>
+</div></div>
 
-<dt class="d_decl">string <a name="rndString"></a><span class="funcName">rndString</span>(size_t size, immutable char[] allowableChars)</dt>
-<dd><p>Creates a randomly generated string of ASCII characters from the given set of allowable characters.</p>
-
-<b>Parameters:</b>
-<table class='parms'>
-<tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
-<tr><td class='code'>immutable char[] <i>allowableChars</i></td><td>A string containing the allowable characters.</td></tr>
-</table>
-</dd>
-
-<dt class="d_decl">string <a name="rndId"></a><span class="funcName">rndId</span>(size_t size)</dt>
-<dd><p>Creates a randomly generated string of lower case ASCII letters.</p>
+<a name='rndString'></a>
+<div class='decl'>
+<div class='defn'>string <span class="funcName">rndString</span>(size_t size)<br/>
+string <a name="rndString"></a><span class="funcName">rndString</span>(size_t size, immutable char[] allowableChars)</div>
+<div class='desc'><p>Creates a randomly generated string of ASCII printable characters.</p>
 
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
+<tr><td class='code'>immutable char[] <i>allowableChars</i></td><td>The produced string will only contain characters present in this given set.</td></tr>
 </table>
-</dd>
+</div></div>
+
+<a name='rndId'></a>
+<div class='decl'>
+<div class='defn'>string <a name="rndId"></a><span class="funcName">rndId</span>(size_t size)</div>
+<div class='desc'><p>Creates a randomly generated string of lower case ASCII letters.</p>
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>size_t <i>size</i></td><td>The number of charcters to generate.</td></tr>
+</table>
+</div></div>
 
 
 <p class='footer'>

@@ -7,7 +7,7 @@
   Written by Jason den Dulk.
 -->
 <head>
- <title>Jaypha Base Documentation</title>
+ <title>Docs - jaypha.range</title>
  <link rel='stylesheet' type='text/css' href='../docs.css'>
 </head>
 <body>
@@ -21,31 +21,39 @@
 <h1>Module jaypha.range</h1>
 
 
-<dt class="d_decl">void <a name="munch"></a><span class="funcName">munch</span>(R,E)(ref R range, E pattern)
+<div class='decl'>
+<a name="munch"></a>
+<div class="defn">void <span class="funcName">munch</span>(R,E)(ref R range, E pattern)<br/>
   if (isInputRange!R &amp;&amp; isInputRange!E &amp;&amp;
-      isScalarType!(ElementType!E) &amp;&amp; isScalarType!(ElementType!R))</dt>
-<dd><p>Consumes the front of <i>range</i> as long the elements are inside <i>pattern</i>.
-That is, as long as one of the elements of <i>pattern</i> matches <i>range.front</i>, than range will be popped.
-<i>range</i> can be a basic input range.</p>
+      isScalarType!(ElementType!E) &amp;&amp; isScalarType!(ElementType!R))</div>
+<div class="desc">
+<p>Consumes the front of <span class='code'>range</span> as long the elements are inside <span class='code'>pattern</span>.
+That is, as long as one of the elements of <span class='code'>pattern</span> matches <span class='code'>range.front</span>, than range will be popped. <span class='code'>range</span> can be a basic input range.</p>
 
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>ref R <i>range</i></td><td>The input range to be processed.</td></tr>
 <tr><td class='code'>E <i>pattern</i></td><td>An input range of the same element type of the range</td></tr>
 </table>
-</dd>
+</div></div>
 
-<dt class="d_decl">void <a name="drain"></a><span class="funcName">drain</span>(R)(ref R r) if (isInputRange!R)</dt>
-<dd><p>Pops <i>range</i> until <i>range.empty</i> is true.</p>
+<div class='decl'>
+<a name="drain"></a>
+<div class="defn">void <span class="funcName">drain</span>(R)(ref R r) if (isInputRange!R)</div>
+<div class="desc">
+<p>Pops <span class='code'>range</span> until <span class='code'>range.empty</span> is true.</p>
 
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>ref R <i>range</i></td><td>The input range to be drained.</td></tr>
 </table>
-</dd>
+</div></div>
 
-<dt class="d_decl">struct <a name="ByChunk"><span class="funcName">ByChunk</span>(R) if (!isNarrowString!R)</a></dt>
-<dd><p>Allows a range to be traversed in chunks. Shouldn't be used with narrow strings as
+<div class='decl'>
+<a name="ByChunk"></a>
+<div class="defn">struct <span class="funcName">ByChunk</span>(R) if (!isNarrowString!R)</a></div>
+<div class="desc">
+<p>Allows a range to be traversed in chunks. Shouldn't be used with narrow strings as
 a character may be chopped in half.</p>
 
 <b>Methods:</b>
@@ -55,10 +63,13 @@ a character may be chopped in half.</p>
 <tr><td class='code'>@property bool empty()</td><td></td></tr>
 <tr><td class='code'>void popFront()</td><td>Pops chunkSize elements off the range.</td></tr>
 </table>
-</dd>
+</div></div>
 
-<dt class="d_decl">ByChunk!R <a name="byChunk"></a><span class="funcName">byChunk</span>(R)(R range, size_t chunckSize)</dt>
-<dd><p>A convenience function for making ByChunk instances.</p>
+<div class='decl'>
+<a name="byChunk"></a>
+<div class="defn">ByChunk!R <span class="funcName">byChunk</span>(R)(R range, size_t chunckSize)</div>
+<div class="desc">
+<p>A convenience function for making ByChunk instances.</p>
 
 <b>Parameters:</b>
 <table class='parms'>
@@ -66,10 +77,13 @@ a character may be chopped in half.</p>
 <tr><td class='code'>size_t <i>chunkSize</i></td><td>The size of the chunks</td></tr>
 </table>
 <p><b>Returns:</b><br>A <i>ByChunk</i> instance initialised with the range and chunk size.</p>
-</dd>
+</div></div>
 
-<dt class="d_decl">struct <a name="ByLines"><span class="funcName">ByLines</span>(R) if (isInputRange!R && isSomeChar!(ElementType!R))</a></dt>
-<dd><p>Allows a range to be traversed by lines. Lines are terminated by "\\r\\n", "\\n", and "\\r", as well as the end of range.</p>
+<div class='decl'>
+<a name="ByLines"></a>
+<div class="defn">struct <span class="funcName">ByLines</span>(R) if (isInputRange!R && isSomeChar!(ElementType!R))</a></div>
+<div class='desc'>
+<p>Allows a range to be traversed by lines. Lines are terminated by "\\r\\n", "\\n", and "\\r", as well as the end of range.</p>
 
 <b>Methods:</b>
 <table class='parms'>
@@ -79,17 +93,20 @@ a character may be chopped in half.</p>
 <tr><td class='code'>@property bool empty()</td><td></td></tr>
 <tr><td class='code'>void popFront()</td><td>Pops a line off the range.</td></tr>
 </table>
-</dd>
+</div></div>
 
-<dt class="d_decl">ByLines!R <a name="byChunk"></a><span class="funcName">byLines</span>(R)(R range)</dt>
-<dd><p>A convenience function for making ByLines instances.</p>
+<div class='decl'>
+<a name="byLines"></a>
+<div class="defn">ByLines!R <span class="funcName">byLines</span>(R)(R range)</div>
+<div class='desc'>
+<p>A convenience function for making ByLines instances.</p>
 
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>R <i>range</i></td><td>The input range.</td></tr>
 </table>
 <p><b>Returns:</b><br>A <i>ByLines</i> instance initialised with the range.</p>
-</dd>
+</div></div>
 
 <p class='footer'>
 Copyright 2015 Jaypha

@@ -7,7 +7,7 @@
   Written by Jason den Dulk.
 -->
 <head>
- <title>Jaypha Base Documentation</title>
+ <title>Docs - jaypha.string</title>
  <link rel='stylesheet' type='text/css' href='../docs.css'>
 </head>
 <body>
@@ -22,10 +22,10 @@
 
 <p>String related functions</p>
 
-<dl>
-
-<dt class="d_decl">string[] <a name="splitUp"></a><span class="funcName">splitUp</span>(string text, const(char)[] delimiters)</dt>
-<dd><p>Splits a string into substrings based on a group of possible delimiters. The delimiters do not all have to be the same</p>
+<div class='decl'>
+<a name="splitUp"></a>
+<div class="defn">string[] <span class="funcName">splitUp</span>(string text, const(char)[] delimiters)</div>
+<div class='desc'><p>Splits a string into substrings based on a group of possible delimiters. The delimiters do not all have to be the same</p>
 
 <b>Parameters:</b>
 <table class='parms'>
@@ -33,10 +33,12 @@
 <tr><td class='code'>const(char)[] <i>delimeters</i></td><td>An array containing all possible delimiters</td></tr>
 </table>
 <b>Returns:</b><br>Any array of strings minus the delimiters.
-</dd>
+</div></div>
 
-<dt class="d_decl">@trusted pure string <a name="toCamelCase"></a><span class="funcName">toCamelCase</span>(string text, bool first = true)</dt>
-<dd><p>Converts a regular string into <a href='http://en.wikipedia.org/wiki/CamelCase'>camel case</a>.</p>
+<div class='decl'>
+<a name="toCamelCase"></a>
+<div class="defn">@trusted pure string <a name="toCamelCase"></a><span class="funcName">toCamelCase</span>(string text, bool first = true)</div>
+<div class='desc'><p>Converts a regular string into <a href='http://en.wikipedia.org/wiki/CamelCase'>camel case</a>.</p>
 
 <b>Parameters:</b>
 <table class='parms'>
@@ -44,43 +46,45 @@
 <tr><td class='code'>bool <i>first</i></td><td>If true, the first letter will be capitalised.</td></tr>
 </table>
 <b>Returns:</b><br>The converted string
-</dd>
+</div></div>
 
-<dt class="d_decl">size_t <a name="altIndexOf"></a><span class="funcName">altIndexOf</span>(string s, char c)</dt>
-<dd><p>A quick and dirty alternative to std.string.indexOf. Only works with ASCII.</p>
+<div class='decl'>
+<a name="altIndexOf"></a>
+<div class="defn">size_t <span class="funcName">altIndexOf</span>(string s, char c)</div>
+<div class='desc'><p>A quick and dirty alternative to std.string.indexOf. Only works with ASCII.</p>
 
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>string <i>s</i></td><td>The string to be searched</td></tr>
 <tr><td class='code'>bool <i>first</i></td><td>The character to be looked for..</td></tr>
 </table>
-<b>Returns:</b><br>The index of the character, or s.length if not found.
-</dd>
+<b>Returns:</b><br>The index of the character, or <span class='code'>s.length</span> if not found.
+</div></div>
 
-<dt class="d_decl">S1 <a name="grab"></a><span class="funcName">grab</span>(alias pred = "a == b",S1, S2)(ref S1 seq, S2 choices)</dt>
-<dd><p>Grabs as much of <i>seq</i>, until a character is found that matches <i>choices</i>
- according to the given predicate. Returns the first part while setting
- <i>seq</i> to the remainder (including the found element).</p>
+<div class='decl'>
+<a name="grab"></a>
+<div class="defn">S1 <span class="funcName">grab</span>(alias pred = "a == b",S1, S2)(ref S1 seq, S2 choices)</div>
+<div class='desc'><p>Grabs as much of <span class='code'>seq</span>, until a character is found that matches <span class='code'>choices</span> according to the given predicate. Returns the first part while setting <span class='code'>seq</span> to the remainder (including the found element).</p>
 
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>S1 <i>seq</i></td><td>The range to be searched</td></tr>
 <tr><td class='code'>S2 <i>choices</i></td><td>The range of elements to be compared against.</td></tr>
 </table>
-<b>Returns:</b><br>Returns what is grabbed, while seq is set to the remainder (including the found element).
-</dd>
+<b>Returns:</b><br>Returns what is grabbed, while <span class='code'>seq</span> is set to the remainder (including the found element).
+</div></div>
 
-<dt class="d_decl">@safe pure nothrow bool <a name="isDigits"></a><span class="funcName">isDigits</span>(string text)</dt>
-<dd><p>Are all characters ASCII digits?</p>
+<div class='decl'>
+<a name="isDigits"></a>
+<div class="defn">@safe pure nothrow bool <span class="funcName">isDigits</span>(string text)</div>
+<div class='desc'><p>Are all characters ASCII digits?</p>
 
 <b>Parameters:</b>
 <table class='parms'>
 <tr><td class='code'>string <i>text</i></td><td>The string to be tested</td></tr>
 </table>
 <b>Returns:</b><br>True if all characters in the string are ASCII digits.
-</dd>
-
-</dl>
+</div></div>
 
 <p class='footer'>
 Copyright 2015 Jaypha

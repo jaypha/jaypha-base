@@ -15,37 +15,37 @@ module jaypha.container.queue;
 import std.array;
 
 //----------------------------------------------------------------------------
-struct Queue(T)
+struct Queue(E)
 //----------------------------------------------------------------------------
 {
-  alias Queue!T Q;
+  alias Queue!E Q;
 
   private:
 
-    T[] theQueue;
+    E[] theQueue;
 
   public:
 
-    void put(T t)
+    void put(E e)
     {
-      theQueue ~= t;
+      theQueue ~= e;
     }
 
-    Q opOpAssign(string str)(T t) if (str == "~")
+    Q opOpAssign(string op)(E e) if (op == "~")
     {
-      theQueue ~= t;
+      theQueue ~= e;
       return this;
     }
 
-    Q opOpAssign(string str)(T[] t) if (str == "~")
+    Q opOpAssign(string op)(E[] e) if (op == "~")
     {
-      theQueue ~= t;
+      theQueue ~= e;
       return this;
     }
 
-    Q opOpAssign(string str)(Q t) if (str == "~")
+    Q opOpAssign(string op)(Q q) if (op == "~")
     {
-      theQueue ~= t.theQueue;
+      theQueue ~= q.theQueue;
       return this;
     }
 
