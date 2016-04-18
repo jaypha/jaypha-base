@@ -50,7 +50,7 @@ struct Queue(E)
     }
 
     @property bool empty() { return theQueue.empty; }
-    @property ref T front() { return theQueue.front(); }
+    @property ref E front() { return theQueue.front; }
     void popFront() { theQueue.popFront(); }
 }
 

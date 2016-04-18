@@ -21,6 +21,7 @@ module jaypha.io.print;
 
 import std.traits;
 import std.conv;
+import std.range.primitives;
 
 void print(Writer,S...)(Writer w, S args)
 {
@@ -31,7 +32,7 @@ void print(Writer,S...)(Writer w, S args)
     {
       std.format.formattedWrite(w, "%s", arg);
     }
-    else static if (isSomeString!A)
+    else static if (isSomeString!A && isOutputRange!(Writer,A))
     {
       w.put(arg);
     }
@@ -39,7 +40,7 @@ void print(Writer,S...)(Writer w, S args)
     {
       w.put(arg ? "true" : "false");
     }
-    else static if (isSomeChar!A)
+    else static if (isSomeChar!A && isOutputRange!(Writer,A))
     {
       w.put(arg);
     }
@@ -65,7 +66,8 @@ void print(Writer,S...)(Writer w, S args)
 
 void println(Writer,S...)(Writer w, S args)
 {
-  w.print(args, '\n');
+  w.print(args);
+  w.put('\n');
 }
 
 void fprint(Writer,Char, A...)(Writer w, in Char[] fmt, A args)
@@ -84,7 +86,7 @@ unittest
 {
   import std.array;
 
-  auto napp = appender!(const(char)[])();
+  auto napp = appender!string();
 
   auto d = "for".dup;
 

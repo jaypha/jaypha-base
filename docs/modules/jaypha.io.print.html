@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Docs - jaypha.io.print</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module jaypha.io.print</h1>
+
+<p>Provides a set of <span class='code'>write</span> like functions inteded
+to work directly with putput ranges.</p>
+
+
+<div class='decl'>
+<a name="print"></a>
+<div class="defn">
+T <span class="funcName">print</span>(Writer,S...)(Writer writer, S args)<br/>
+</div>
+<div class="desc">
+<p>Outputs a number of arguments to <span class='code'>writer</span> as
+strings.</p>
+<p>Each argument of <span class='code'>args</span> is outputted one after the
+other. Strings and character values will be outputted verbatim. Enumerated type
+values will have the enumeration label printed. Booleans are outputted as "true"
+and "false". For all other types, the following is done. If a conversion is
+possible with <span class='code'>to!string()</span>, that function is called.
+If not, if the argument has a <span class='code'>copy(Writer)</span> method,
+that will be called. Otherwise, if the argument has a
+<span class='code'>toString()</span> method, that will be called. Failing all that,
+the argument is passed to <span class='code'>formattedWrite</code>.</p>
+<table class='parms'>
+<tr><td class='code'>Writer <i>writer</i></td><td>Output range to write to.</td></tr>
+<tr><td class='code'>S... <i>args</i></td><td>Values to be outputted.</td></tr>
+</table>
+</div></div>
+
+<div class='decl'>
+<a name="println"></a>
+<div class="defn">
+T <span class="funcName">println</span>(Writer,S...)(Writer writer, S args)<br/>
+</div>
+<div class="desc">
+<p>Same as <span class='code'>print</span>, but outputs a "\n" at the end.</p>
+</div></div>
+
+<div class='decl'>
+<a name="fprint"></a>
+<div class="defn">
+T <span class="funcName">fprint</span>(Writer,Char,S...)(Writer writer, in Char[] fmt, S args)<br/>
+</div>
+<div class="desc">
+<p>Formatted output. Analagous to <span class='code'>writef</span>.</p>
+<table class='parms'>
+<tr><td class='code'>Writer <i>writer</i></td><td>Output range to write to.</td></tr>
+<tr><td class='code'>Char[] <i>fmt</i></td><td>Format string.</td></tr>
+<tr><td class='code'>S... <i>args</i></td><td>Values to be outputted.</td></tr>
+</table>
+</div></div>
+
+<div class='decl'>
+<a name="fprintln"></a>
+<div class="defn">
+T <span class="funcName">fprintln</span>(Writer,S...)(Writer writer, S args)<br/>
+</div>
+<div class="desc">
+<p>Same as <span class='code'>fprint</span>, but outputs a "\n" at the end.</p>
+</div></div>
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>

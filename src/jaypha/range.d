@@ -114,51 +114,60 @@ unittest
 
 //----------------------------------------------------------------------------
 
-struct ByLines(R) if (isInputRange!R && isSomeChar!(ElementType!R))
+struct ByLines(R)
+  if (isInputRange!R && (isSomeChar!(ElementType!R) || is(ElementType!R : ubyte)))
 {
-  alias ElementType!R Char;
+  alias ElementType!R E;
 
   private:
     R r;
-    Char[] line;
+    E[] line;
 
   public:
     bool empty = false;
-    string eoln;
+    string eoln = "x";
 
   this(R _r) { r = _r; popFront(); }
 
   void popFront()
   {
     assert(!empty);
-    if (r.empty)
+    if (eoln == "")
       empty =true;
     else
     {
-      auto napp = appender!(Char[])();
+      auto napp = appender!(E[])();
 
-      Char[] ln;
-      while (!r.empty && r.front != '\n')
+      E[] ln;
+      while (!r.empty && r.front != '\n' && r.front != '\r')
       {
         napp.put(r.front);
         r.popFront();
       }
-      if (!r.empty) r.popFront();
-      ln = napp.data;
-      if (ln.length > 0 && ln[ln.length-1] == '\r')
+      if (!r.empty)
       {
-        eoln = "\r\n";
-        line = ln[0..$-1];
+        auto c = r.front; r.popFront();
+        if (c == '\r')
+        {
+          if (r.front == '\n')
+          {
+            r.popFront();
+            eoln = "\r\n";
+          }
+          else
+            eoln = "\r";
+        }
+        else
+          eoln = "\n";
       }
       else
-      {
-        eoln = "\n";
-        line = ln;
-      }
+        eoln = "";
+
+      line = napp.data;
     }
   }
 
-  @property Char[] front()
+  @property E[] front()
   {
     return line;
   }
@@ -216,13 +225,13 @@ unittest
     assert(i == witness.length, text(i, " != ", witness.length));
   }
 
-  test("", null);
-  test("\n", [ "" ]);
+  test("", [ "" ]);
+  test("\n", [ "", "" ]);
   test("asd\ndef\nasdf", [ "asd", "def", "asdf" ]);
-  test("asd\ndef\nasdf\n", [ "asd", "def", "asdf" ]);
-  test("asd\n\nasdf\n", [ "asd", "", "asdf" ]);
-  test("asd\r\ndef\r\nasdf\r\n", [ "asd", "def", "asdf" ]);
-  test("asd\r\n\r\nasdf\r\n", [ "asd", "", "asdf" ]);
+  test("asd\ndef\nasdf\n", [ "asd", "def", "asdf", "" ]);
+  test("asd\n\nasdf\n", [ "asd", "", "asdf", "" ]);
+  test("asd\r\ndef\r\nasdf\r\n", [ "asd", "def", "asdf", "" ]);
+  test("asd\r\n\r\nasdf\r\n", [ "asd", "", "asdf", "" ]);
 }
 
 //----------------------------------------------------------------------------

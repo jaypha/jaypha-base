@@ -15,18 +15,19 @@ module jaypha.container.set;
 //----------------------------------------------------------------------------
 // Simple collection where each element is unique.
 //----------------------------------------------------------------------------
-struct Set(T)
+struct Set(E)
 //----------------------------------------------------------------------------
 {
-  void put(T t)
+  void put(E e)
   {
-    foreach (e; theSet)
-      if (t == e) return;
+    foreach (i; theSet)
+      if (e == i) return;
     
-    theSet ~= t;
+    theSet ~= e;
   }
 
   @property size_t size() { return theSet.length; }
+  alias size length;
 
   @property auto range()
   {
@@ -34,28 +35,28 @@ struct Set(T)
   }
 
   private:
-
-    T[] theSet;
+    E[] theSet;
 }
 
 //----------------------------------------------------------------------------
 // Like Set, but the elements are ordered, and the set is indexable.
 //----------------------------------------------------------------------------
-struct IndexableSet(T)
+struct IndexableSet(E)
 //----------------------------------------------------------------------------
 {
-  size_t put(T t)
+  size_t put(E e)
   {
-    foreach (i,e; theSet)
-      if (t == e) return i;
+    foreach (i,j; theSet)
+      if (e == j) return i;
 
-    theSet ~= t;
+    theSet ~= e;
     return theSet.length-1;
   }
 
   @property size_t size() { return theSet.length; }
+  alias size length;
 
-  T opIndex(size_t i) { return theSet[i]; }
+  E opIndex(size_t i) { return theSet[i]; }
 
   @property auto range()
   {
@@ -63,8 +64,7 @@ struct IndexableSet(T)
   }
 
   private:
-
-    T[] theSet;
+    E[] theSet;
 }
 
 alias IndexableSet OrderedSet;
@@ -86,7 +86,7 @@ unittest
 
   assert(set.range == [5,7]);
 
-  OrderedSet!long oSet;
+  IndexableSet!long oSet;
 
   assert(oSet.size == 0);
 

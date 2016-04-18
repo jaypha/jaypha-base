@@ -7,7 +7,7 @@
   Written by Jason den Dulk.
 -->
 <head>
- <title>Jaypha Base Documentation</title>
+ <title>Docs - jaypha.container.stack</title>
  <link rel='stylesheet' type='text/css' href='../docs.css'>
 </head>
 <body>
@@ -18,9 +18,38 @@
  <div style='clear:both' ></div>
 </div>
 
+<h1>Module jaypha.container.stack</h1>
+
+<p>This module defines a stack.</p>
+<p>A stack is a buffer where the last element added is the first element to be retrieved, or LIFO (Last In First Out).</p>
+
+
+<div class='decl'>
+<div class="defn">struct <a name="Stack"></a><span class="funcName">Stack(E)</span></div>
+<div class="desc">
+<p>A simple stack implementation</p>
+<p>This stack acts as an ouput range for adding elements to the queue, and as an input range for retrieving them.</p>
+
+<p><b>Properties</b></p>
+<table class='parms'>
+<tr><td class='code'>bool empty</td>
+    <td>True if the stack is empty</td></tr>
+<tr><td class='code'>ref E front</td>
+    <td>The top element of the stack</td></tr>
+</table>
+
+<p><b>Methods</b></p>
+<table class='parms'>
+<tr><td class='code'>void put(E e)</td>
+    <td>Adds <span class='code'>e</span> to the top of the stack</td></tr>
+<tr><td class='code'>void popFront()</td>
+    <td>Removes the top element from the stack.</td></tr>
+</table>
+
+</div></div>
 
 <p class='footer'>
-Copyright 2015 Jaypha
+Copyright 2016 Jaypha
 </p>
 </div>
 </body>

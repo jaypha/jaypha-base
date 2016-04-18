@@ -11,7 +11,7 @@
 module test;
 
 /*
- * Universal unittester.
+ * Unit tester for all modules in the project.
  * Be sure to add -Isrc and -unittest.
  */
 

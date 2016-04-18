@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Docs - jaypha.io.serialize</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module jaypha.io.serialize</h1>
+
+<p>Serializes data to and from strings.</p>
+
+<p>It does not support the ability to read/write classes and structs, but does
+support arrays and associative arrays.</p>
+
+<p>To serialize a value, call <span class='code'>serialize!(Type)(value)</span>.</p>
+
+<p>Unserializing is a bit more tricky. You need to know the type before hand
+and unserialise using it, although you unserialize using Variant.</p>
+
+<p>To unserialize a value call <span class='code'>unserialize!(Type)(ref const(char)[] str)</span>
+<span class='code'>str</span> will be updated to the remainder of the string and the decoded
+value is returned.</p>
+
+<h3>Future Direction</h3>
+<p>Make it all work using ranges - Maybe.</p>
+
+<p class='footer'>
+Copyright 2015 Jaypha
+</p>
+</div>
+</body>
+</html>

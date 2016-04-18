@@ -6,4 +6,13 @@
   "targetType": "sourceLibrary",
   "importPaths": [ "src" ],
   "srcPaths": [ "src" ],
+
+  "configurations":
+  [
+    {
+      "name": "tester",
+      "targetType": "executable",
+      "mainSourceFile": "tester/tester.d"
+    }
+  ]
 }

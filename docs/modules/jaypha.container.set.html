@@ -7,7 +7,7 @@
   Written by Jason den Dulk.
 -->
 <head>
- <title>Jaypha Base Documentation</title>
+ <title>Docs = jaypah.container.set</title>
  <link rel='stylesheet' type='text/css' href='../docs.css'>
 </head>
 <body>
@@ -18,6 +18,56 @@
  <div style='clear:both' ></div>
 </div>
 
+<h1>Module jaypha.container.set</h1>
+
+<p>This module defines sets.</p>
+<p>A set is a group of elements where each element is unique in the set
+   (no duplicates). Sets typically have no ordering.</p>
+
+<div class='decl'>
+<div class="defn">struct <a name="Hash"></a><span class="funcName">Set(E)</span></div>
+<div class="desc">
+<p>A simple set implementation</p>
+<p>This set acts as an ouput range for adding elements. If the element already exists
+within the set (satisfies '=='), then it is not added.</p>
+
+<p><b>Properties</b></p>
+<table class='parms'>
+<tr><td class='code'>size_t size</td>
+    <td>Number of elemetns in the set.</td></tr>
+<tr><td class='code'>E[] range</td>
+    <td>Elements of the set as a range.</td></tr>
+</table>
+
+<p><b>Methods</b></p>
+<table class='parms'>
+<tr><td class='code'>void put(E e)</td>
+    <td>Adds an element to the set, but only if it is not already an element.</td></tr>
+</table>
+</div></div>
+
+<div class='decl'>
+<div class="defn">struct <a name="Hash"></a><span class="funcName">IndexableSet(E)</span></div>
+<div class="desc">
+<p>A set implementation where the elements can be accessed via an index.</p>
+
+<p><b>Properties</b></p>
+<table class='parms'>
+<tr><td class='code'>size_t size</td>
+    <td>Number of elemetns in the set.</td></tr>
+<tr><td class='code'>E[] range</td>
+    <td>Elements of the set as a range.</td></tr>
+</table>
+
+<p><b>Methods</b></p>
+<table class='parms'>
+<tr><td class='code'>size_t put(E e)</td>
+    <td>Adds an element to the set, but only if it is not already an element.
+        Returns the index of the element (either newly added, or previously existing)</td></tr>
+<tr><td class='code'>E opIndex(size_t i)</td>
+    <td>Retrives the element referred to by <span class='code'>i</span></td></tr>
+</table>
+</div></div>
 
 <p class='footer'>
 Copyright 2015 Jaypha

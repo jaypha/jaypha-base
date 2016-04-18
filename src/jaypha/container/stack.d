@@ -14,21 +14,21 @@ module jaypha.container.stack;
 
 import std.array;
 
-struct Stack(T)
+struct Stack(E)
 {
   private:
 
-    T[] q;
+    E[] q;
 
   public:
 
-    void put(T t)
+    void put(E e)
     {
-      q ~= t;
+      q ~= e;
     }
 
     @property bool empty() { return q.empty; }
-    @property ref T front() { return q[$-1]; }
+    @property ref E front() { return q[$-1]; }
     void popFront() { q = q[0..$-1]; }
 
     void clear() { q.length = 0; }
