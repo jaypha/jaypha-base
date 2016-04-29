@@ -12,20 +12,16 @@
 
 module jaypha.types;
 
-import std.range;
-import std.traits;
-
 //-----------------------------------------------------------------------------
+// Much easier to work with without the [].
 
-alias string[string] strstr; // Much easier to work with without the [].
+alias string[string] strstr;
 
 //-----------------------------------------------------------------------------
 // Byte arrays and ranges utilise 'ubyte'. Used for octect streams and binary
 // data. Also a convenient way to avoid UTF conversion issues.
 
 alias immutable(ubyte)[] ByteArray;
-
-enum isByteRange(R) = (isInputRange!(R) && is(ElementType!(R) : ubyte));
 
 //-----------------------------------------------------------------------------
 // UTF encoding based on D type.

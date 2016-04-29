@@ -16,6 +16,7 @@ module test;
  */
 
 import jaypha.types;
+import jaypha.traits;
 import jaypha.algorithm;
 import jaypha.conv;
 import jaypha.json;
@@ -24,6 +25,7 @@ import jaypha.rnd;
 import jaypha.string;
 import jaypha.io.print;
 import jaypha.io.serialize;
+import jaypha.io.binarywriter;
 import jaypha.container.hash;
 import jaypha.container.queue;
 import jaypha.container.set;

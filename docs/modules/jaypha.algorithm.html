@@ -23,6 +23,24 @@
 <p>Some algorithm routines and templates</p>
 
 <div class='decl'>
+<a name="munch"></a>
+<div class="defn">void <span class="funcName">munch</span>(R,E)(ref R range, E pattern)<br/>
+  if (isInputRange!R &amp;&amp; isInputRange!E &amp;&amp;
+      isScalarType!(ElementType!E) &amp;&amp; isScalarType!(ElementType!R))</div>
+<div class="desc">
+<p>Consumes the front of <span class='code'>range</span> as long the elements are inside <span class='code'>pattern</span>.
+Works similar to std.string.munch, except this works with general ranges.
+
+
+<b>Parameters:</b>
+<table class='parms'>
+<tr><td class='code'>ref R <i>range</i></td><td>The input range to be processed.</td></tr>
+<tr><td class='code'>E <i>pattern</i></td><td>An input range of the same element type of the range</td></tr>
+</table>
+<p><b>Returns:</b><br/>The material consumed.</p>
+</div></div>
+
+<div class='decl'>
 <a name=""></a><div class="defn">
 template meld(alias func)<br/>
 auto <span class="funcName">meld</span>(A)(A array)

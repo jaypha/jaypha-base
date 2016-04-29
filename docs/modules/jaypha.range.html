@@ -23,18 +23,10 @@
 
 <div class='decl'>
 <a name="munch"></a>
-<div class="defn">void <span class="funcName">munch</span>(R,E)(ref R range, E pattern)<br/>
-  if (isInputRange!R &amp;&amp; isInputRange!E &amp;&amp;
-      isScalarType!(ElementType!E) &amp;&amp; isScalarType!(ElementType!R))</div>
+<div class="defn">void <span class="funcName">munch</span>(R,E)(ref R range, E pattern)</div>
 <div class="desc">
-<p>Consumes the front of <span class='code'>range</span> as long the elements are inside <span class='code'>pattern</span>.
-That is, as long as one of the elements of <span class='code'>pattern</span> matches <span class='code'>range.front</span>, than range will be popped. <span class='code'>range</span> can be a basic input range.</p>
-
-<b>Parameters:</b>
-<table class='parms'>
-<tr><td class='code'>ref R <i>range</i></td><td>The input range to be processed.</td></tr>
-<tr><td class='code'>E <i>pattern</i></td><td>An input range of the same element type of the range</td></tr>
-</table>
+<p>Defined in <a href='jaypha.algorithm.html#munch'>jaypha.algorithm.html</a>.
+Imported here for backward compatibility.</p>
 </div></div>
 
 <div class='decl'>
@@ -106,6 +98,64 @@ a character may be chopped in half.</p>
 <tr><td class='code'>R <i>range</i></td><td>The input range.</td></tr>
 </table>
 <p><b>Returns:</b><br>A <i>ByLines</i> instance initialised with the range.</p>
+</div></div>
+
+<div class='decl'>
+<a name="Buffered"></a>
+<div class="defn">struct <span class="funcName">Buffered</span>(W,E, size_t bufferSize = defaultBufferSize)<br/>&nbsp;&nbsp;if (isOutputRange!(W,E[]) && bufferSize &lt; 16777216)</a></div>
+<div class="desc">
+<p>Buffered output for output ranges. Stores data temporarily in a buffer so that
+it can be sent on to the output range in chunks.</p>
+
+<b>Template Parameters</b>
+<table class='parms'>
+<tr><td class='code'>W</td><td>Output range</td></tr>
+<tr><td class='code'>E</td><td>The element type to be bufferd.</td></tr>
+<tr><td class='code'>bufferSize</td><td>Size of the internal buffer. Cannot be larger than 16M.</td></tr>
+</table>
+
+<b>Methods:</b>
+<table class='parms'>
+<tr><td class='code'>this(W writer)</td><td></td></tr>
+<tr><td class='code'>void put(E e)</td><td>Puts a single element</td></tr>
+<tr><td class='code'>void put(E[] e)</td><td>Puts an array of elements</td></tr>
+<tr><td class='code'>void flush()</td><td>Flushes the contents of the internal buffer to the output.</td></tr>
+</table>
+</div></div>
+
+<div class='decl'>
+<a name="buffered"></a>
+<div class="defn">auto ref <span class="funcName">buffered</span>(E, size_t bufferSize = defaultBufferSize, W)(W writer)<br/></div>
+<div class="desc">
+<p>Convenience function for Buffered.</p>
+</div></div>
+
+<div class='decl'>
+<a name="UnPopable"></a>
+<div class="defn">struct <span class="funcName">UnPopable</span>(R)<br/>&nbsp;&nbsp;if (isInputRange!R)</a></div>
+<div class="desc">
+<p>A decorator that provides "ungetc" like ability for input ranges.</p>
+
+<b>Template Parameters</b>
+<table class='parms'>
+<tr><td class='code'>R</td><td>Input range</td></tr>
+<tr><td class='code'>E</td><td>The element type of <span class='code'>R</span>.</td></tr>
+</table>
+
+<b>Methods:</b>
+<table class='parms'>
+<tr><td class='code'>empty, front, popFront</td><td>Standard input range functionality.</td></tr>
+<tr><td class='code'>void unPopFront(E e)</td>
+  <td>Puts a single element back onto the range so that <span class='code'>front</span> is now <span class='code'>e</span>.<br/>
+      <b>Note:</b> The original range given to UnPopable will not be adjusted.</td></tr>
+</table>
+</div></div>
+
+<div class='decl'>
+<a name="unPopable"></a>
+<div class="defn">auto ref <span class="funcName">unPopable</span>(R)(R range)<br/></div>
+<div class="desc">
+<p>Convenience function for UnPopable.</p>
 </div></div>
 
 <p class='footer'>

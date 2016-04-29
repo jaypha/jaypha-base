@@ -2,7 +2,7 @@
 /*
  * Some algorithm routines and templates
  *
- * Copyright 2013 Jaypha
+ * Copyright 2013-6 Jaypha
  *
  * Distributed under the Boost Software License, Version 1.0.
  * (See http://www.boost.org/LICENSE_1_0.txt)
@@ -13,15 +13,63 @@
 
 module jaypha.algorithm;
 
+import jaypha.traits;
+
+import std.range.primitives;
+
 public import std.algorithm;
 import std.typecons, std.range, std.array, std.traits;
+
+
+//----------------------------------------------------------------------------
+// Consumes the front of the range as long the elements are inside pattern.
+
+auto munch(alias pred = "a == b", R1,R2)(ref R1 range, R2 pattern)
+  if (isInputRange!R1 && isInputRange!R2 &&
+      isScalarType!(ElementType!R2) && isScalarType!(ElementType!R1))
+{
+  alias ElementType!R1 E1;
+  alias ElementType!R2 E2;
+
+  auto a = appender!(E1[]);
+
+  for (; !range.empty && !find!pred(pattern, cast(E2)range.front).empty; range.popFront())
+    a.put(range.front);
+
+  return a.data;
+}
+
+unittest
+{
+  import std.array;
+  import std.range.interfaces;
+
+  ubyte[] txt = cast(ubyte[]) "acabbacbxyz".dup;
+
+  txt.munch("abc");
+  assert(txt == "xyz");
+}
 
 //-----------------------------------------------------------------------------
 // Grabs as much of seq, unitl a character is found that matches choices
 // according to the given predicate. Returns the first part while setting
 // seq to the remainder (including the found character).
 
-S1 grab(alias pred = "a == b",S1, S2)(ref S1 seq, S2 choices) if (isInputRange!S1 && isForwardRange!S2) 
+auto grab(alias pred = "a == b", R1, R2)(ref R1 seq, R2 choices)
+  if (!hasSlicing!R1 && isInputRange!R1 && isForwardRange!R2)
+{
+  alias ElementType!R1 E;
+
+  auto a = appender!(E[]);
+
+  for (; !seq.empty && find!pred(choices, seq.front).empty; seq.popFront())
+    a.put(seq.front);
+  return a.data;
+}
+
+
+S1 grab(alias pred = "a == b",S1, S2)(ref S1 seq, S2 choices)
+  if (hasSlicing!S1 && isForwardRange!S2)
 {
   auto remainder = findAmong!(pred,S1,S2)(seq, choices);
   scope(exit) seq = remainder;
@@ -117,55 +165,36 @@ unittest
 
 //----------------------------------------------------------------------------
 // Alternative to std.alogrithm.findSplit usable with non-rewindable ranges.
-// R1 is input range, R2 is slicable
 
-auto findSplit(R1,R2)(ref R1 haystack, R2 needle) //if ((ElementType!R1 == ElementType!R2) && isInputRange!(R1) && hasSlicing!(R2))
+auto findSplit(R1,R2)(ref R1 haystack, R2 needle)
+  if (isInputRange!R1 && isDynamicArray!R2 && isComparable!(R1,R2))
 {
-  alias ElementType!R2 E;
-  R2 firstPart, secondPart;
+  import std.string : chomp;
+  import std.algorithm.searching : endsWith;
 
-  while (true)
+  assert(needle.length > 0);
+  auto store = appender!R2();
+  while (!haystack.empty)
   {
-    if (startsWith(needle, secondPart))
-    {
-      foreach (n; needle[secondPart.length .. $])
-      {
-        if (haystack.empty || haystack.front != n) break;
-        secondPart ~= n;
-        haystack.popFront();
-      }
-      if (needle.length == secondPart.length)
-      {
-        assert(equal(needle, secondPart));
-        return tuple(firstPart, secondPart);
-      }
-      if (haystack.empty)
-        return tuple(firstPart~secondPart, uninitializedArray!(R2)(0));
-      else
-      {
-        secondPart ~= haystack.front;
-        haystack.popFront();
-      }
-    }
-
-    firstPart ~= secondPart[0];
-    secondPart = secondPart[1..$];
+    store.put(haystack.front);
+    haystack.popFront();
+    if (store.data.endsWith(needle))
+      return tuple(store.data.chomp(needle),needle);
   }
+  return tuple(store.data, uninitializedArray!(R2)(0));
 }
 
 //-------------------------------------
 
 unittest
 {
-  //import std.stdio;
-  ubyte[] txt = cast(ubyte[]) "acabacbxyz".dup;
-
-  string haystack = "donabababcbxyz";
-  string needle = "ababc";
+  import std.stdio;
+  string haystack = "donôbôbôbcbxyz";
+  string needle = "ôbôbc";
 
   auto res = findSplit(haystack, needle);
-  assert(res[0] == "donab");
-  assert(res[1] == "ababc");
+  assert(res[0] == "donôb");
+  assert(res[1] == "ôbôbc");
   assert(haystack == "bxyz");
 
   auto res2 = findSplit(haystack, needle);
@@ -178,6 +207,12 @@ unittest
   assert(res3[0] == "");
   assert(res3[1] == "a");
   assert(haystack == "sdfjkewu");
+
+  haystack = "";
+  auto res4 = findSplit(haystack, "p");
+  assert(res4[0] == "");
+  assert(res4[1] == "");
+  assert(haystack == "");
 }
 
 //----------------------------------------------------------------------------

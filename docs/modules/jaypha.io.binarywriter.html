@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<!--
+  Documentation for Jaypha Base.
+  Copyright 2015 Jaypha.
+  Distributed under the Boost Licence.
+  Written by Jason den Dulk.
+-->
+<head>
+ <title>Docs - jaypha.io.binarywriter</title>
+ <link rel='stylesheet' type='text/css' href='../docs.css'>
+</head>
+<body>
+<div class='body'>
+<div class='header'>
+ <img style='float:right' src='../images/jaypha-94x24.gif'/>
+ <a href='../docs.html'><span style='font-weight: bold; font-size: 24px;'>Base</a>
+ <div style='clear:both' ></div>
+</div>
+
+<h1>Module jaypha.io.binarywriter</h1>
+
+<p>An adaptor to treat <span class='code'>File</span> objects as output ranges
+suitable for writing binary output. <span class='code'>lockingTextWriter</span>
+is unsuitable because it performs UTF conversions.</p>
+
+
+<div class='decl'>
+<a name="BinaryWriter"></a>
+<div class="defn">struct <span class="funcName">BinaryWriter</span></div>
+<div class="desc">
+
+<p><b>Methods</b></p>
+<table class='parms'>
+<tr><td class='code'>this(File file)</td><td>Constructs with a <span class='code'>File</span>.</td></tr>
+<tr><td class='code'>void put(T)(T e)</td><td>Outputs a single value.</td></tr>
+<tr><td class='code'>void put(void[] e)</td><td>Outputs an array.</td></tr>
+</table>
+</div></div>
+
+</div></div>
+
+<p class='footer'>
+Copyright 2016 Jaypha
+</p>
+</div>
+</body>
+</html>
