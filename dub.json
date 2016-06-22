@@ -10,7 +10,7 @@
   "configurations":
   [
     {
-      "name": "unittest",
+      "name": "test",
       "targetType": "executable",
       "mainSourceFile": "test/test.d"
     }

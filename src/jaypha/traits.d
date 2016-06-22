@@ -18,12 +18,7 @@ import std.range.primitives;
 
 enum isByteRange(R) = (isInputRange!R && is(Unqual!(ElementType!R) : ubyte));
 
-enum isComparable(T1,T2, alias pred = "a == b") = is (typeof(
-  (inout int = 0)
-  {
-    bool x = binaryFun!pred(T1.init,T2.init);
-  }
-));
+enum isComparable(T1,T2, alias pred = "a == b") = __traits(compiles,binaryFun!pred(T1.init,T2.init));
 
 unittest
 {

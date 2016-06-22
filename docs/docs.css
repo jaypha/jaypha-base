@@ -28,7 +28,7 @@ h3 { font-size: 15px; color: red; }
 
 table { border-collapse: collapse; }
 
-td, th { padding: 3px; border: 1px solid black; }
+td, th { padding: 3px; border: 1px solid #bbb; }
 
 a { text-decoration: none; }
 

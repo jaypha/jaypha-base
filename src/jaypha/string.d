@@ -15,7 +15,7 @@ module jaypha.string;
 import std.string;
 import std.uni;
 import std.array;
-import std.c.string;
+import core.stdc.string;
 
 //-----------------------------------------------------------------------------
 // A quick and dirty alternative indexOf. Only works with ASCII.

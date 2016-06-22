@@ -108,11 +108,11 @@ unittest
 //----------------------------------------------------------------------------
 
 struct ByLines(R)
-  if (isInputRange!R && (isSomeChar!(ElementType!R) || is(ElementType!R : ubyte)))
+  if (isInputRange!R && (isSomeChar!(ElementEncodingType!R) || is(ElementType!R : ubyte)))
 {
   import std.array;
 
-  alias ElementType!R E;
+  alias ElementEncodingType!R E;
 
   private:
     R r;
@@ -311,10 +311,10 @@ unittest
 //----------------------------------------------------------------------------
 // Provides "ungetc" for input ranges.
 
+import jaypha.container.stack;
+
 struct UnPopable(R) if (isInputRange!R)
 {
-  import jaypha.container.stack;
-
   alias ElementType!R E;
 
   R range;

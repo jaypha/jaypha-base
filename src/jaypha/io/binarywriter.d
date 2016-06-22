@@ -27,8 +27,8 @@ struct BinaryWriter
   void put(T)(T b) if (isBasicType!T)
   { fwrite(&b,T.sizeof,1,s.getFP()); }
 
-  void put(void[] b)
-  { fwrite(b.ptr,1, b.length, s.getFP()); }
+  void put(T)(ref T b) if (isArray!T && isBasicType!(ElementEncodingType!T))
+  { fwrite(b.ptr, (ElementEncodingType!T).sizeof, b.length, s.getFP()); }
 }
 
 unittest
@@ -38,12 +38,12 @@ unittest
 
   w.put(cast(ubyte)23);
   w.put(cast(ubyte)46);
-  ubyte[] x = [12,101];
+  uint[] x = [12,101];
   w.put(x);
   f.flush();
   f.rewind();
 
-  assert(f.size == 4);
-  auto r = f.rawRead(new ubyte[4]);
-  assert(r == [23,46,12,101]);
+  assert(f.size == 10);
+  auto r = f.rawRead(new ubyte[10]);
+  assert(r == [23,46,12,0,0,0,101,0,0,0]);
 }

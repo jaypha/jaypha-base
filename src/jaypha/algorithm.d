@@ -167,10 +167,9 @@ unittest
 // Alternative to std.alogrithm.findSplit usable with non-rewindable ranges.
 
 auto findSplit(R1,R2)(ref R1 haystack, R2 needle)
-  if (isInputRange!R1 && isDynamicArray!R2 && isComparable!(R1,R2))
+  if (isInputRange!R1 && isDynamicArray!R2 && isComparable!(ElementType!R1,ElementType!R2))
 {
-  import std.string : chomp;
-  import std.algorithm.searching : endsWith;
+  import std.algorithm.searching : endsWith, findSplitBefore;
 
   assert(needle.length > 0);
   auto store = appender!R2();
@@ -179,7 +178,7 @@ auto findSplit(R1,R2)(ref R1 haystack, R2 needle)
     store.put(haystack.front);
     haystack.popFront();
     if (store.data.endsWith(needle))
-      return tuple(store.data.chomp(needle),needle);
+      return store.data.findSplitBefore(needle);
   }
   return tuple(store.data, uninitializedArray!(R2)(0));
 }
@@ -213,6 +212,25 @@ unittest
   assert(res4[0] == "");
   assert(res4[1] == "");
   assert(haystack == "");
+
+  struct NoForward
+  {
+    ubyte[] bytes;
+    @property bool empty() { return bytes.length == 0; }
+    @property ubyte front() { return bytes[0]; }
+    void popFront() { bytes = bytes[1..$]; }
+  }
+
+  auto x = NoForward(cast(ubyte[])"123456789");
+  auto n = cast(ubyte[]) "456";
+  auto res5 = findSplit(x,n);
+  assert(res5[0] == cast(ubyte[]) "123");
+  assert(res5[1] == cast(ubyte[]) "456");
+
+  res5 = findSplit(x,n);
+  assert(res5[0] == cast(ubyte[]) "789");
+  assert(res5[1] == cast(ubyte[]) "");
+
 }
 
 //----------------------------------------------------------------------------
