@@ -66,6 +66,10 @@ See docs/docs.html for reference documentation.
 **serialize** - Converting data to and from compact strings for easy storage and transfer.  
 **BinaryWriter** - Adaptor for writing binary data to a file as an output range.
 
+#### Configuration
+
+**extractProperties** - Extracts values from a source in the form of 'property : value'.
+
 ## License
 
 Distributed under the Boost Software License, Version 1.0.  

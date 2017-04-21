@@ -13,6 +13,9 @@ module test;
 /*
  * Unit tester for all modules in the project.
  * Be sure to add -Isrc and -unittest.
+ *
+ * Can be used with Dub
+ * dub run --force --build=unittest --config=test
  */
 
 import jaypha.types;
